@@ -3,13 +3,10 @@
   .header
     label.img_add(for="img_add")
       img.avatar(:src="account.avatar")
+      span.fa.fa-edit.avatar-edit
     .name {{ account.name }}
-    input#img_add(
-      type="file",
-      accept="image/*",
-      multiple="multiple",
-      @change="upload($event)"
-    )
+    input#img_add(type="file", accept="image/*", @change="upload($event)")
+    // multiple="multiple",
   .content.main-width
     p account
     NuxtLink.button(to="/account/setting") 账户设置
@@ -47,10 +44,23 @@ export default {
       width: 64px
       border: none
       border-radius: 50%
-      background: #ff1414
       overflow: hidden
     .img_add
       cursor: pointer
+      position: relative
+      display: block
+      margin: auto
+      .avatar-edit
+        display: none
+        color: #ffffff
+        position: absolute
+        top: calc( 50% - .5rem )
+        left: calc( 50% - .5rem )
+    .img_add:hover
+      .avatar
+        filter: brightness(40%)
+      .avatar-edit
+        display: block
     #img_add
       display: none
     .name
