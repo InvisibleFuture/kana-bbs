@@ -18,6 +18,9 @@
 </template>
 
 <script>
+import "assets/sass/main.sass";
+import "assets/sass/default.sass";
+
 export default {
   computed: {
     account() {
@@ -36,31 +39,13 @@ export default {
 </script>
 
 <style lang="sass">
-html, body
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
-  font-size: 16px
-  word-spacing: 1px
-  -ms-text-size-adjust: 100%
-  -webkit-text-size-adjust: 100%
-  -moz-osx-font-smoothing: grayscale
-  -webkit-font-smoothing: antialiased
-  box-sizing: border-box
-  margin: 0
-  padding: 0
-
-.main
-  min-height: 100vh
-  background-color: #dee2e6
+.block
+  padding-top: 10rem
+  padding-bottom: 10rem
 
 @media (min-width: 480px)
   .main-width
-    //max-width: 480px
     margin: 0 2rem
-
-//@media (min-width: 992px)
-//  .main-width
-//    max-width: 800px
-//    margin: auto
 
 @media (min-width: 1280px)
   .main-width
@@ -68,26 +53,26 @@ html, body
     margin: auto
 
 header.header
-  background-color: rgba(0, 0, 0, .8)
+  //background-color: rgba(0, 0, 0, .8)
   nav.navbar
     display: flex
     align-items: center
     .navbar-logo
-      color: #fff
+      //color: #fff
       margin: 0 1rem
       font-size: 1.2rem
       font-weight: 600
     .navbar-item
-      color: #eee
+      //color: #eee
       padding: 1rem
       font-size: 1.2rem
       font-weight: 600
     .navbar-item:hover
-      color: #fff
+      //color: #fff
     .expnone
       flex: 1
     .userinfo
-      color: #ffffff
+      //color: #ffffff
       font-weight: 600
       display: flex
       align-items: center
@@ -100,14 +85,6 @@ footer.footer
   text-align: center
   margin: 4rem
 
-a
-  text-decoration: none
-a:link  // 未访问的
-  color: #222222
-a:visited
-  color: #223388
-a:active // 点击时
-  color: #2233cc
 a.button
   border: none
   border-radius: .25rem
