@@ -1,0 +1,35 @@
+{
+  "name": "kana-bbs",
+  "version": "1.0.0",
+  "description": "Kana 开发者社区",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InvisibleFuture/kana-bbs.git"
+  },
+  "author": "satori.love",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InvisibleFuture/kana-bbs/issues"
+  },
+  "homepage": "https://github.com/InvisibleFuture/kana-bbs#readme",
+  "devDependencies": {
+    "pug": "^3.0.2",
+    "sass": "^1.49.0",
+    "sass-loader": "^10.1.1",
+    "pug-plain-loader": "^1.0.0"
+  },
+  "dependencies": {
+    "nuxt": "2.15.8",
+    "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/proxy": "^2.1.0",
+    "three": "^0.137.4"
+  }
+}
