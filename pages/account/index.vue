@@ -1,19 +1,18 @@
 <template lang="pug">
 .account
-  .main-width
-    img.avatar(:src="account.avatar")
-    span.name {{ account.name }}
-    //input.upload(type="file", name="photos", multiple, @change="setAvatar()")
-    .banner_item.add
-      label.img_add(for="img_add") +
-      input#img_add(
-        type="file",
-        accept="image/*",
-        multiple="multiple",
-        @change="upload($event)"
-      )
-  p account
-  NuxtLink.button(to="/account/setting") 账户设置
+  .header
+    label.img_add(for="img_add")
+      img.avatar(:src="account.avatar")
+    .name {{ account.name }}
+    input#img_add(
+      type="file",
+      accept="image/*",
+      multiple="multiple",
+      @change="upload($event)"
+    )
+  .content.main-width
+    p account
+    NuxtLink.button(to="/account/setting") 账户设置
 </template>
 
 <script>
@@ -26,47 +25,43 @@ export default {
   methods: {
     upload(event) {
       let data = new FormData();
+      let option = { headers: { "Content-Type": "multipart/form-data" } };
       data.append("img", event.target.files[0]);
-      this.$axios
-        .post("/api/account", data, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((res) => {
-          console.log(res.data);
-          //res.data.forEach((item) => this.list.push(item));
-        });
+      this.$axios.post("/api/account", data, option).then((res) => {
+        console.log(res.data);
+      });
     },
-    //setAvatar() {
-    //  let myForm = new FormData();
-    //  let files = document.querySelector("[type=file]").files;
-    //  for (var i = 0; i < files.length; i++) {
-    //    myForm.append("photos", files[i]);
-    //  }
-    //  //this.$axios.post("/api/account", myForm).then((res) => {
-    //  //  console.log(res.data);
-    //  //});
-    //  console.log(myForm);
-    //  fetch("/api/account", {
-    //    method: "POST",
-    //    //headers: { "Content-Type": "multipart/form-data" },
-    //    body: myForm,
-    //  })
-    //    .then((Response) => Response.json())
-    //    .then((data) => {
-    //      console.log(data);
-    //    });
-    //},
   },
 };
 </script>
 
 <style lang="sass">
 .account
-  .avatar
-    height: 64px
-    width: 64px
-    border: none
-    border-radius: 50%
-    background: #ff1414
-    overflow: hidden
+  >.header
+    background-color: rgba(0, 0, 0, .5)
+    text-align: center
+    height: 200px
+    padding: 4rem
+    .avatar
+      height: 64px
+      width: 64px
+      border: none
+      border-radius: 50%
+      background: #ff1414
+      overflow: hidden
+    .img_add
+      cursor: pointer
+    #img_add
+      display: none
+    .name
+      font-size: 1.2rem
+      font-weight: 600
+      color: #ffffff
+  >.content
+    background: #ffffff
+    padding: 2rem
+    border-radius: .5rem
+    box-sizing: border-box
+    position: relative
+    top: -4rem
 </style>

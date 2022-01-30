@@ -6,7 +6,9 @@
       NuxtLink.navbar-item(to="/") 主页
       .expnone
       .navbar-user(v-if="account.online")
-        NuxtLink.username(to="/account") {{ account.name }}
+        NuxtLink.userinfo(to="/account")
+          img.avatar(:src="account.avatar")
+          span.name {{ account.name }}
       .navbar-sign(v-else)
         NuxtLink.button(to="/account/signin") Signin
         NuxtLink.button(to="/account/create") Login
@@ -84,9 +86,16 @@ header.header
       color: #fff
     .expnone
       flex: 1
-    .username
+    .userinfo
       color: #ffffff
       font-weight: 600
+      display: flex
+      align-items: center
+      .avatar
+        width: 24px
+        height: 24px
+        border-radius: 50%
+        margin-right: .5rem
 footer.footer
   text-align: center
   margin: 4rem
