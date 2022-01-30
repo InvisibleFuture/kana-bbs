@@ -4,8 +4,8 @@
     h1.title {{ thread.title }}
     .info
       span.user {{ thread.user.name }}
-      span.date 2021-01-01
-      span.view 1933
+      span.date {{ rwdate(thread.createdAt) }}
+      span.view {{ thread.views }}
     .tags
       span.tag test
       span.tag demo
@@ -40,6 +40,10 @@ export default {
     },
   },
   methods: {
+    rwdate(utc) {
+      let t = new Date(utc);
+      return t.getMonth() + 1 + "月 " + t.getDate() + ", " + t.getFullYear();
+    },
     loadpostlist() {
       this.$axios
         .get(`/api/post?attach=thread&aid=${this.post.aid}`)

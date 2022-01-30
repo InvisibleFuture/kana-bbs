@@ -13,7 +13,6 @@
         .expnone
         nuxt-link.thread-create(to="/thread/create") 发新帖
       .content
-        p {{ data }}
         ThreadList(:data="data")
   aside
     .card

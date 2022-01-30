@@ -6,7 +6,7 @@
       NuxtLink.navbar-item(to="/") 主页
       .expnone
       .navbar-user(v-if="account.online")
-        span {{ account.name }}
+        NuxtLink.username(to="/account") {{ account.name }}
       .navbar-sign(v-else)
         NuxtLink.button(to="/account/signin") Signin
         NuxtLink.button(to="/account/create") Login
@@ -84,12 +84,21 @@ header.header
       color: #fff
     .expnone
       flex: 1
+    .username
+      color: #ffffff
+      font-weight: 600
 footer.footer
   text-align: center
   margin: 4rem
 
 a
   text-decoration: none
+a:link  // 未访问的
+  color: #222222
+a:visited
+  color: #223388
+a:active // 点击时
+  color: #2233cc
 a.button
   border: none
   border-radius: .25rem

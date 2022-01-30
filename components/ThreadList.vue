@@ -2,14 +2,12 @@
 .thread-list
   ul(v-if="data.length")
     li(v-for="item in data", :key="item._id")
-      NuxtLink(:to="'/thread/' + item._id")
-        .avatar
-        .content
-          .title {{ item.title }}
-          .info
-            span {{ item.user.name }}
-            span {{ item.createdAt }}
-            span {{ item.updatedAt }}
+      NuxtLink.avatar(:to="'/user/' + item.user._id")
+      NuxtLink.content(:to="'/thread/' + item._id")
+        .title {{ item.title }}
+        .info
+          span {{ item.user.name }}
+          span {{ rwdate(item.createdAt) }}
   .thread-none(v-else) 没有内容~
 </template>
 
@@ -26,14 +24,13 @@
     list-style: none
     padding: 0
     margin: 0
-    li a
+    li
       display: flex
       align-items: center
       border-radius: .5rem
       height: 48px
       margin: 0
       padding: 8px 0
-      color: #222222
       .avatar
         width: 48px
         height: 48px
@@ -41,18 +38,25 @@
         border-radius: 50%
         overflow: hidden
       .content
+        flex: 1
         .title
           font-size: 1.1rem
           font-weight: 600
         .info
           span
             margin-right: .5rem
-    li a:hover
+    li:hover
       background: rgba(0, 0, 0, .025)
 </style>
 
 <script>
 export default {
   props: ["data"],
+  methods: {
+    rwdate(utc) {
+      let t = new Date(utc);
+      return t.getMonth() + 1 + "月 " + t.getDate() + ", " + t.getFullYear();
+    },
+  },
 };
 </script>
