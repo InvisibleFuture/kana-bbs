@@ -17,5 +17,6 @@ export default {
         changeOrigin: true
       }
     }]
-  ]
+  ],
+  css: ['@fortawesome/fontawesome-free/css/all.css']
 }
