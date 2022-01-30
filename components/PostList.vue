@@ -2,7 +2,8 @@
 .post-list
   ul(v-if="data.length")
     li(v-for="item in data", :key="item._id")
-      NuxtLink.avatar(:to="`/user/${item.user._id}`")
+      NuxtLink(:to="`/user/${item.user._id}`")
+        img.avatar(:src="item.user.avatar")
       .content
         .title {{ item.user.name }}
         .info

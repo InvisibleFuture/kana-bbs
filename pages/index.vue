@@ -11,7 +11,7 @@
         span 最新
         span 精华
         .expnone
-        nuxt-link.thread-create(to="/thread/create") 发新帖
+        nuxt-link.create-thread(to="/thread/create") 新议题
       .content
         ThreadList(:data="data")
   aside
@@ -58,12 +58,12 @@ export default {
   .content
     padding: 1rem
 
-.thread-create
+a.create-thread
   border: none
   border-radius: .25rem
   padding: .5rem 1rem
   background-color: #007bff
-  color: #ffffff
+  color: #ffffff !important
   display: block
 
 .bbs-title

@@ -13,7 +13,7 @@
     p {{ thread.data }}
     PostList(:data="postlist")
     .post-create(v-if="account.online")
-      .avatar
+      img.avatar(:src="account.avatar")
       .content
         textarea(v-model="post.data", rows="12")
         button.submit(@click="createpost") 发表
@@ -112,4 +112,5 @@ export default {
       background-color: #cc1414
       font-weight: 600
       min-width: 6rem
+      cursor: pointer
 </style>
