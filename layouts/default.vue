@@ -1,31 +1,55 @@
 <template lang="pug">
 .main
   header.header
-    nav.navbar.main-width
-      NuxtLink.navbar-logo(to="/") Kana
-      NuxtLink.navbar-item(to="/") 主页
-      .expnone
-      .navbar-user(v-if="account.online")
-        NuxtLink.userinfo(to="/account")
-          img.avatar(:src="account.avatar")
-          span.name {{ account.name }}
-      .navbar-sign(v-else)
-        NuxtLink.button(to="/account/signin") Signin
-        NuxtLink.button(to="/account/create") Login
+    .circumscription
+      .logo Kana
+      nav.navbar
+        NuxtLink.navbar-item(to="/") 论坛
+        NuxtLink.navbar-item(to="/docs") 文档
+        NuxtLink.navbar-item(to="/chat") 聊天室
+      .online
+        .navbar-user(v-if="account.online")
+          NuxtLink.userinfo(to="/account")
+            img.avatar(:src="account.avatar")
+            span.name {{ account.name }}
+        .navbar-sign(v-else)
+          NuxtLink.button(to="/account/signin") Signin
+          NuxtLink.button(to="/account/create") Login
+      .websocket(:class="{ on: websocket }")
   Nuxt
   footer.footer
-    b Kana
+    p
+      b Kana
+    .github
+      a(href="https://github.com/InvisibleFuture/kana")
+        span.fab.fa-github
 </template>
 
 <script>
-import "assets/sass/main.sass";
-import "assets/sass/default.sass";
+import "@/assets/sass/main.sass";
+import "@/assets/sass/default.sass";
+
+import socket from "@/assets/js/socket.js";
 
 export default {
+  data: () => ({
+    websocket: false,
+  }),
   computed: {
     account() {
       return this.$store.state.account;
     },
+  },
+  beforeMount() {
+    // 如果掉线调用变红, 如果上线调用变绿
+    socket.onclose = () => {
+      this.websocket = false;
+    };
+    socket.onopen = () => {
+      this.websocket = true;
+    };
+    let protocol = location.protocol === "https:" ? "wss:" : "ws:";
+    socket.init(`${protocol}//${location.host}/api/`);
   },
   mounted() {
     console.log(
@@ -39,57 +63,51 @@ export default {
 </script>
 
 <style lang="sass">
-.block
-  padding-top: 10rem
-  padding-bottom: 10rem
+.websocket
+  background: red
+  border-radius: 50%
+  width: 1rem
+  height: 1rem
+  margin: .25rem .5rem
+.websocket.on
+  background: green
 
-@media (min-width: 480px)
-  .main-width
-    margin: 0 2rem
-
-@media (min-width: 1280px)
-  .main-width
-    max-width: 1200px
-    margin: auto
-
-header.header
-  //background-color: rgba(0, 0, 0, .8)
-  nav.navbar
+.main
+  >header.header>div
     display: flex
-    align-items: center
-    .navbar-logo
-      //color: #fff
-      margin: 0 1rem
-      font-size: 1.2rem
-      font-weight: 600
-    .navbar-item
-      //color: #eee
-      padding: 1rem
-      font-size: 1.2rem
-      font-weight: 600
-    .navbar-item:hover
-      //color: #fff
-    .expnone
+    align-items: flex-end
+    padding-top: .5rem
+    >.logo
+      font-size: 2rem
+      font-weight: 900
+      margin-right: 1.5rem
+    >nav.navbar
       flex: 1
-    .userinfo
-      //color: #ffffff
-      font-weight: 600
       display: flex
       align-items: center
-      .avatar
-        width: 24px
-        height: 24px
-        border-radius: 50%
-        margin-right: .5rem
+      //justify-content: center
+      .navbar-item
+        margin: 0 .25rem
+        padding: 0 .75rem
+        height: 2rem
+        line-height: 2rem
+        text-align: center
+        font-weight: 600
+    >.online
+      .navbar-user
+        .userinfo
+          font-weight: 600
+          display: flex
+          align-items: center
+          .avatar
+            width: 24px
+            height: 24px
+            border-radius: 50%
+            margin-right: .5rem
+
 footer.footer
   text-align: center
-  margin: 4rem
-
-a.button
-  border: none
-  border-radius: .25rem
-  padding: .5rem 1rem
-  margin: 1rem .5rem
-  background-color: #007bff
-  color: #ffffff
+  padding: 4rem
+  .github
+    font-size: 2rem
 </style>
