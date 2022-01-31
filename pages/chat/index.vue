@@ -4,7 +4,10 @@
     p Chat 频道列表 {{ chatlist.length }}
     ul(v-if="chatlist.length")
       li(v-for="item in chatlist", :key="item._id")
-        p {{ item.name }}
+        p {{ item }}
+          span {{ item.name }}
+          i(v-if="true") (已订阅)
+          i(v-else) (未订阅)
     button(@click="create") 创建频道
   .ceremony
     .circumscription
@@ -32,6 +35,8 @@ export default {
       this.chatactive.push(data);
       console.log(data);
     });
+    // 组合键提交
+    this.keyCodeForEvent();
   },
   methods: {
     create() {
@@ -49,6 +54,38 @@ export default {
       );
       this.chat.data = "";
     },
+    keyCodeForEvent() {
+      let self = this;
+      let code = 0;
+      let code2 = 0;
+      document.onkeydown = (e) => {
+        let evn = e || event;
+        let key = evn.keyCode || evn.which || evn.charCode;
+        if (key === 17) {
+          code = 1;
+        }
+        if (key === 13) {
+          code2 = 1;
+        }
+        if (code === 1 && code2 === 1) {
+          //alert("Ctrl + Enter");
+          this.submit();
+          // do
+          code = 0;
+          code2 = 0;
+        }
+      };
+      document.onkeyup = (e) => {
+        let evn = e || event;
+        let key = evn.keyCode || evn.which || evn.charCode;
+        if (key === 17) {
+          code = 0;
+        }
+        if (key === 13) {
+          code2 = 0;
+        }
+      };
+    },
   },
 };
 </script>
@@ -56,7 +93,8 @@ export default {
 <style lang="sass">
 .chat-index
   textarea.dialogue
-    width: 100%
+    display: block
+    width: 32rem
     padding: 1rem
     border: 1px solid #eee
     border-radius: .5rem

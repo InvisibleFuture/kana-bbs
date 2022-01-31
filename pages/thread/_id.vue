@@ -3,9 +3,9 @@
   .header
     h1.title {{ thread.title }}
     .info
-      span.user {{ thread.user.name }}
-      span.date {{ rwdate(thread.createdAt) }}
-      span.view {{ thread.views }}
+      span.user.fas.fa-user-secret {{ thread.user.name }}
+      span.date.far.fa-calendar-alt {{ rwdate(thread.createdAt) }}
+      span.view.far.fa-eye {{ thread.views }}
     .tags
       span.tag test
       span.tag demo
@@ -75,6 +75,8 @@ export default {
     text-align: center
     color: #ffffff
     span
+      margin: 0 .5rem
+    span::before
       margin: 0 .5rem
   >.content
     background: #ffffff
