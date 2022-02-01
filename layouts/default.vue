@@ -70,40 +70,45 @@ export default {
   height: 1rem
   margin: .25rem .5rem
 .websocket.on
-  background: green
+  background: #00ee00
 
 .main
-  >header.header>div
-    display: flex
-    align-items: flex-end
-    padding-top: .5rem
-    >.logo
-      font-size: 2rem
-      font-weight: 900
-      margin-right: 1.5rem
-    >nav.navbar
-      flex: 1
+  >header.header
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    padding: 1rem 0
+    >div
       display: flex
-      align-items: center
-      //justify-content: center
-      .navbar-item
-        margin: 0 .25rem
-        padding: 0 .75rem
-        height: 2rem
-        line-height: 2rem
-        text-align: center
-        font-weight: 600
-    >.online
-      .navbar-user
-        .userinfo
+      align-items: flex-end
+      >.logo
+        font-size: 2rem
+        font-weight: 900
+        margin-right: 1.5rem
+      >nav.navbar
+        flex: 1
+        display: flex
+        align-items: center
+        //justify-content: center
+        .navbar-item
+          margin: 0 .25rem
+          padding: 0 .75rem
+          height: 2rem
+          line-height: 2rem
+          text-align: center
           font-weight: 600
-          display: flex
-          align-items: center
-          .avatar
-            width: 24px
-            height: 24px
-            border-radius: 50%
-            margin-right: .5rem
+      >.online
+        .navbar-user
+          .userinfo
+            font-weight: 600
+            display: flex
+            align-items: center
+            .avatar
+              width: 24px
+              height: 24px
+              border-radius: 50%
+              margin-right: .5rem
 
 footer.footer
   text-align: center

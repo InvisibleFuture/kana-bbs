@@ -9,7 +9,7 @@
     .tags
       span.tag test
       span.tag demo
-  .content.main-width
+  .content.circumscription
     p {{ thread.data }}
     PostList(:data="postlist")
     .post-create(v-if="account.online")
