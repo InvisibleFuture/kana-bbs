@@ -1,18 +1,20 @@
 <template lang="pug">
 .docs-index
-  .docs.circumscription
-    .outline
-      ul
-        li(v-for="item in list", :key="item._id")
-          NuxtLink(:to="`/docs/${item._id}`") {{ item.name }}
-          i.fas.fa-sort-numeric-up-alt(
-            @click="settop(item, true)",
-            v-if="account.gid"
-          ) {{ item.top || 0 }}
-      .create-doc(v-if="account.gid")
-        button(@click="submit()") Create
-    .content
-      Nuxt
+  .ceremony
+    .circumscription
+      .docs
+        .outline
+          ul
+            li(v-for="item in list", :key="item._id")
+              NuxtLink(:to="`/docs/${item._id}`") {{ item.name }}
+              i.fas.fa-sort-numeric-up-alt(
+                @click="settop(item, true)",
+                v-if="account.gid"
+              ) {{ item.top || 0 }}
+          .create-doc(v-if="account.gid")
+            button(@click="submit()") Create
+        .content
+          Nuxt
 </template>
 
 <script>
@@ -64,18 +66,17 @@ export default {
 
 <style lang="sass">
 .docs-index
-  margin: 8rem 4rem
   .docs
     display: flex
     width: 100%
     .outline
       width: 12rem
       padding: 2rem
-      background: #ccefef
+      //background: #ccefef
     .content
       padding: 2rem
-      background: #ffefef
       flex: 1
+      //background: #ffefef
 
 input.title, textarea.data
   width: 100%

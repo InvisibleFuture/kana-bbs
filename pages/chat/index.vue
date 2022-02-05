@@ -1,21 +1,41 @@
 <template lang="pug">
 .chat-index
-  .circumscription
-    p Chat 频道列表 {{ chatlist.length }}
-    ul(v-if="chatlist.length")
-      li(v-for="item in chatlist", :key="item._id")
-        p {{ item }}
-          span {{ item.name }}
-          i(v-if="true") (已订阅)
-          i(v-else) (未订阅)
-    button(@click="create") 创建频道
   .ceremony
     .circumscription
-      span chat
-      DialogueList(:data="chatactive")
-      textarea.dialogue(v-model="chat.data", rows="12")
-      button.submit(@click="submit") 发表
+      .flex
+        .index
+          p Chat 频道列表 {{ chatlist.length }}
+          ul(v-if="chatlist.length")
+            li(v-for="item in chatlist", :key="item._id")
+              span {{ item.name }}
+              i(v-if="true") (已订阅)
+              i(v-else) (未订阅)
+          button(@click="create") 创建频道
+        .content
+          DialogueList(:data="chatactive")
+          textarea.dialogue(v-model="chat.data", rows="12")
+          button.submit(@click="submit") 发表
 </template>
+
+
+<style lang="sass">
+.chat-index
+  textarea.dialogue
+    display: block
+    width: 32rem
+    padding: 1rem
+    border: 1px solid #eee
+    border-radius: .5rem
+    box-sizing: border-box
+
+  .flex
+    display: flex
+    .index
+      width: 24rem
+    .content
+      flex: 1
+</style>
+
 
 <script>
 import socket from "@/assets/js/socket.js";
@@ -89,14 +109,3 @@ export default {
   },
 };
 </script>
-
-<style lang="sass">
-.chat-index
-  textarea.dialogue
-    display: block
-    width: 32rem
-    padding: 1rem
-    border: 1px solid #eee
-    border-radius: .5rem
-    box-sizing: border-box
-</style>
