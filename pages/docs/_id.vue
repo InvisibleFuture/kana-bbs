@@ -1,21 +1,27 @@
 <template lang="pug">
 .docs-item
-  button.editor(@click="editor()") {{ edit ? '取消编辑' : '编辑模式' }}
+  button.editor(@click="editor()", v-if="account.gid") {{ edit ? '取消编辑' : '编辑模式' }}
   button.submit(@click="submit()", v-if="edit") 保存修改
   .contenter(v-if="!edit")
     h1.title {{ data.name }}
-    p {{ data.data }}
+    div(v-html="markdown(data.data)")
   .contenter(v-else)
     input.title(v-model="doc.name")
     textarea.data(v-model="doc.data", rows="32")
 </template>
 
 <script>
+import { marked } from "marked";
 export default {
   asyncData({ $axios, params }) {
     return $axios.get(`/api/docs/${params.id}`).then((res) => {
       return { data: res.data, edit: false, doc: { data: "", name: "" } };
     });
+  },
+  computed: {
+    account() {
+      return this.$store.state.account;
+    },
   },
   methods: {
     editor() {
@@ -34,6 +40,9 @@ export default {
         }
         console.log(res.data);
       });
+    },
+    markdown(data) {
+      return marked.parse(data);
     },
   },
 };

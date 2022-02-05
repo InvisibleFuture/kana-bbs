@@ -22,15 +22,16 @@
   "homepage": "https://github.com/InvisibleFuture/kana-bbs#readme",
   "devDependencies": {
     "pug": "^3.0.2",
+    "pug-plain-loader": "^1.0.0",
     "sass": "^1.49.0",
-    "sass-loader": "^10.1.1",
-    "pug-plain-loader": "^1.0.0"
+    "sass-loader": "^10.1.1"
   },
   "dependencies": {
-    "nuxt": "2.15.8",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@nuxtjs/axios": "^5.12.0",
     "@nuxtjs/proxy": "^2.1.0",
-    "@fortawesome/fontawesome-free": "^5.15.3",
+    "marked": "^4.0.12",
+    "nuxt": "2.15.8",
     "three": "^0.137.4"
   }
 }

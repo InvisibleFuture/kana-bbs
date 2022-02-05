@@ -3,14 +3,14 @@
   .docs.circumscription
     .outline
       ul
-        li 下载安装
-        li 接口使用
-        li 插件制作
-        li 基础开发
         li(v-for="item in list", :key="item._id")
           NuxtLink(:to="`/docs/${item._id}`") {{ item.name }}
-      .create-doc
-        button(@click="createin = !createin") Create
+          i.fas.fa-sort-numeric-up-alt(
+            @click="settop(item, true)",
+            v-if="account.gid"
+          ) {{ item.top || 0 }}
+      .create-doc(v-if="account.gid")
+        button(@click="submit()") Create
     .content
       Nuxt
 </template>
@@ -26,10 +26,36 @@ export default {
       };
     });
   },
+  computed: {
+    account() {
+      return this.$store.state.account;
+    },
+  },
+  mounted() {
+    this.listsort();
+  },
   methods: {
     submit() {
       this.$axios.post("/api/docs", this.doc).then((res) => {
+        if (res.status === 200) {
+          this.list.push(res.data);
+        }
+      });
+    },
+    settop(item, n) {
+      item.top = item.top || 0;
+      item.top = n ? item.top + 1 : item.top - 1;
+      let data = { top: item.top };
+      this.$axios.patch(`/api/docs/${item._id}`, data).then((res) => {
+        if (res.status === 200) this.listsort();
         console.log(res.data);
+      });
+    },
+    listsort() {
+      this.list.sort((x, y) => {
+        x.top = x.top || 0;
+        y.top = y.top || 0;
+        return y.top - x.top;
       });
     },
   },
