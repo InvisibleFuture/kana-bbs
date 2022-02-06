@@ -17,7 +17,6 @@
           button.submit(@click="submit") 发表
 </template>
 
-
 <style lang="sass">
 .chat-index
   textarea.dialogue
@@ -36,7 +35,6 @@
       flex: 1
 </style>
 
-
 <script>
 import socket from "@/assets/js/socket.js";
 
@@ -44,14 +42,17 @@ export default {
   asyncData({ $axios }) {
     return $axios("/api/chat").then((res) => {
       return {
+        userstore: new Map(),
         chatlist: res.data,
         chat: { data: "" },
-        chatactive: [{ _id: "2333", data: "cacd" }],
+        chatactive: [],
       };
     });
   },
   mounted() {
-    socket.controller.set("chat", (data) => {
+    socket.controller.set("chat", async (data) => {
+      // 为数据添加 user 信息
+      data.user = await this.loaduser(data.uid);
       this.chatactive.push(data);
       console.log(data);
     });
@@ -59,6 +60,22 @@ export default {
     this.keyCodeForEvent();
   },
   methods: {
+    async loaduser(uid) {
+      if (!uid || uid === "0") {
+        return { _id: "0", name: "游客", avatar: "" };
+      }
+      let user = this.userstore.get(uid);
+      if (!user) {
+        return await this.$axios.get("/api/user/" + uid).then((res) => {
+          if (res.status === 200) {
+            this.userstore.set(uid, res.data);
+            return res.data;
+          }
+          return { _id: "0", name: "游客", avatar: "" };
+        });
+      }
+      return user;
+    },
     create() {
       let data = { name: "FM DEMO", data: "23333" };
       this.$axios.post("/api/chat", data).then((res) => {

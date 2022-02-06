@@ -2,9 +2,9 @@
 .dialogue-list
   .post(v-for="item in data", :key="item._id")
     .left
-      .avatar
+      img.avatar(:src="item.user.avatar")
     .right
-      .name Last
+      .name {{ item.user.name }}
       .message {{ item.data }}
 </template>
 
