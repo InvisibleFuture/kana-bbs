@@ -5,6 +5,8 @@
       .docs
         .outline
           ul
+            li
+              NuxtLink(to="/docs") かな
             li(v-for="item in list", :key="item._id")
               NuxtLink(:to="`/docs/${item._id}`") {{ item.name }}
               i.fas.fa-sort-numeric-up-alt(
