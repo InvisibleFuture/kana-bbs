@@ -1,8 +1,6 @@
-// 调色盘 @satori (不涉及默认元素操作)
-//
+// 调色盘 @satori
 // 背景色 基调为纯白 #ffffff
 // 背景色 主调为薄灰 #f5f6f7
-//
 // 前景色 基调为深灰 #222222
 // 前景色 主调为厚黑 #111111
 
@@ -13,21 +11,24 @@
   --color-default: rgba(0,30,38, 1)
   --color-main: rgba(0,30,38, 1)
 
-// 仪式
+// 仪式(突出重点的展示)
 .ceremony
   padding-top: 10rem
   padding-bottom: 10rem
   margin: 10rem 0
   background: var(--background-main)
 
-// 界限
+// 界限(对不同屏幕的使用宽度)
 .circumscription
+  transition: all .25s linear
   @media (min-width: 480px)
     margin: 0 2rem
+  @media (min-width: 1024px)
+    max-width: 980px
+    margin-left: auto
+    margin-right: auto
   @media (min-width: 1280px)
     max-width: 1200px
     margin-left: auto
     margin-right: auto
-
 // 汇聚 converge
-// 过渡 transition: all .75s linear

@@ -99,6 +99,7 @@ export default {
           line-height: 2rem
           text-align: center
           font-weight: 600
+          white-space: nowrap
       >.online
         .navbar-user
           .userinfo
