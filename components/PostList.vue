@@ -5,10 +5,14 @@
       NuxtLink(:to="`/user/${item.user._id}`")
         img.avatar(:src="item.user.avatar")
       .content
-        .title {{ item.user.name }}
+        .name(:class="{ adminname: item.user.gid === 1 }") {{ item.user.name }}
         .info
           span {{ rwdate(item.updatedAt) }}
           div(v-html="markdown(item.data)")
+      .options
+        i.fas.fa-eraser(v-if="account.gid === 1 || account.uid === item.uid")
+        i.fas.fa-marker(v-if="account.gid === 1 || account.uid === item.uid")
+        i.fas.fa-heart(:class="{ like: item.like }", @click="like(item._id)")
   .post-none(v-else) 没有评论~
 </template>
 
@@ -39,18 +43,42 @@
         overflow: hidden
       .content
         padding-left: 1rem
-        .title
+        .name
           font-size: 1.1rem
           font-weight: 600
+        .name.adminname
+          color: #ff5599
         .info
           span
             margin-right: .5rem
+      .options
+        margin-left: auto
+        i
+          cursor: pointer
+          padding: 0
+          margin: 0 .5rem
+          color: #888888
+          //display: none
+        i:hover
+          color: #cc1414
+        i.like
+          color: #cc1414
+          //display: inline
+    //li:hover
+    //  .options
+    //    i
+    //      display: inline
 </style>
 
 <script>
 import { marked } from "marked";
 export default {
   props: ["data"],
+  computed: {
+    account() {
+      return this.$store.state.account;
+    },
+  },
   methods: {
     rwdate(utc) {
       let t = new Date(utc);
@@ -58,6 +86,19 @@ export default {
     },
     markdown(data) {
       return marked.parse(data);
+    },
+    like(_id) {
+      let data = { attach: "post", aid: _id };
+      console.log(data);
+      this.$axios.post("/api/like", data).then((res) => {
+        if (res.status === 200) {
+          this.data.forEach((item) => {
+            if (item._id === _id) {
+              item.like = true;
+            }
+          });
+        }
+      });
     },
   },
 };

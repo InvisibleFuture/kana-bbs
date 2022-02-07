@@ -1,3 +1,4 @@
 <template lang="pug">
-Nuxt
+.thread-wwwwwww
+  Nuxt
 </template>

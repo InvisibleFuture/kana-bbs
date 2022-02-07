@@ -68,7 +68,10 @@ export default {
     createpost() {
       console.log(this.post);
       this.$axios.post("/api/post", this.post).then((res) => {
-        console.log(res.data);
+        if (res.status === 200) {
+          this.postlist.push(res.data);
+          this.post.data = "";
+        }
       });
     },
   },

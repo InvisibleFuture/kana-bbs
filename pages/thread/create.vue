@@ -9,12 +9,10 @@
     .tags
       span.tag test
       span.tag demo
-  .content.main-width
-    p {{ thread.data }}
-    .content.main-width
-      input.title(v-model="thread.title")
-      textarea.data(v-model="thread.data", rows="32")
-      button.submit(@click="submit") 发表
+  .content.circumscription
+    input.title(v-model="thread.title")
+    textarea.data(v-model="thread.data", rows="32")
+    button.submit(@click="submit") 发表
 </template>
 
 <script>
@@ -31,6 +29,9 @@ export default {
         return console.log("尚无内容");
       }
       this.$axios.post("/api/thread", this.thread).then((res) => {
+        if (res.status === 200) {
+          return this.$router.push("/");
+        }
         console.log(res.data);
       });
     },

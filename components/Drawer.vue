@@ -10,7 +10,8 @@
     :class="{ show: show, hidden: !show }",
     @click.stop
   )
-    slot
+    .containerbox
+      slot
 </template>
 
 <script>
@@ -69,19 +70,28 @@ export default {
   background: rgba(0, 0, 0, 0.8)
 .container
   color: #333333
-  background: #ffffff
   position: absolute
   left: 0
-  top: 3rem
+  top: 0 //3rem
   right: 0
   bottom: 0
-  border-radius: 2rem 2rem 0 0
   overflow: auto
   scrollbar-width: none
   -ms-overflow-style: none
   //padding: 2rem 4rem
   //max-width: 1280px
   //margin: 0 auto
+  @media (max-width: 1280px)
+    //background: #ff1414
+    width: 980px
+    //top: 0
+    //border-radius: 0 0 0 0
+  .containerbox
+    color: #333333
+    background: #ffffff
+    border-radius: 2rem 2rem 0 0
+    overflow: hidden
+    margin-top: 3rem
 
 .container::-webkit-scrollbar
   display: none // Chrome Safari

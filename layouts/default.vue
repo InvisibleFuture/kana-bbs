@@ -53,6 +53,7 @@ export default {
       "padding:4px;border:1px solid #e9546b;"
     );
     this.$store.dispatch("account/profile");
+    console.log(window.devicePixelRatio);
   },
 };
 </script>

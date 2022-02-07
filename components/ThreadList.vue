@@ -38,6 +38,7 @@
         background: rgba(0, 0, 0, .05)
         border-radius: 50%
         overflow: hidden
+        margin-right: .5rem
       .content
         flex: 1
         .title
