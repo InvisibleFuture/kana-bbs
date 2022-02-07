@@ -92,6 +92,7 @@ export default {
     border-radius: 2rem 2rem 0 0
     overflow: hidden
     margin-top: 3rem
+    min-height: 100%
 
 .container::-webkit-scrollbar
   display: none // Chrome Safari

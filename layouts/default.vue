@@ -7,7 +7,7 @@
         NuxtLink.navbar-item(to="/") 论坛
         NuxtLink.navbar-item(to="/docs") 文档
         NuxtLink.navbar-item(to="/chat") 聊天室
-        NuxtLink.navbar-item(to="/admin") admin
+        //NuxtLink.navbar-item(to="/admin") admin
       .online
         .navbar-user(v-if="account.online")
           NuxtLink.userinfo(to="/account")
