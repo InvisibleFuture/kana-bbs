@@ -18,12 +18,6 @@
           NuxtLink.button(to="/account/create") Login
       .websocket(:class="{ on: websocket }")
   Nuxt
-  footer.footer
-    p
-      b Kana
-    .github
-      a(href="https://github.com/InvisibleFuture/kana")
-        span.fab.fa-github
 </template>
 
 <script>

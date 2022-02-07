@@ -1,31 +1,31 @@
 <template lang="pug">
-.thread
-  .header
-    h1.title {{ thread.title }}
-    .info
-      span.user.fas.fa-user-secret {{ thread.user.name }}
-      span.date.far.fa-calendar-alt {{ rwdate(thread.createdAt) }}
-      span.view.far.fa-eye {{ thread.views }}
-    .tags
-      span.tag test
-      span.tag demo
-  .content.circumscription
-    .thread-main(v-html="markdown(thread.data)")
-    button.magic
-      i.fas.fa-magic
-
-    //button.editor(
-    //  v-if="account.online && (account.uid === thread.uid || account.gid === 1)",
-    //  @click="edit_mode = !edit_mode"
-    //)
-    //  i.fas.fa-magic
-    //  | Editor
-    PostList(:data="postlist")
-    .post-create(v-if="account.online")
-      img.avatar(:src="account.avatar")
-      .content
-        textarea(v-model="post.data", rows="12")
-        button.submit(@click="createpost") 发表
+Drawer
+  .thread
+    .header
+      h1.title {{ thread.title }}
+      .info
+        span.user.fas.fa-user-secret {{ thread.user.name }}
+        span.date.far.fa-calendar-alt {{ rwdate(thread.createdAt) }}
+        span.view.far.fa-eye {{ thread.views }}
+      .tags
+        span.tag test
+        span.tag demo
+    .content.circumscription
+      .thread-main(v-html="markdown(thread.data)")
+      button.magic
+        i.fas.fa-magic
+      //button.editor(
+      //  v-if="account.online && (account.uid === thread.uid || account.gid === 1)",
+      //  @click="edit_mode = !edit_mode"
+      //)
+      //  i.fas.fa-magic
+      //  | Editor
+      PostList(:data="postlist")
+      .post-create(v-if="account.online")
+        img.avatar(:src="account.avatar")
+        .content
+          textarea(v-model="post.data", rows="12")
+          button.submit(@click="createpost") 发表
 </template>
 
 <script>
