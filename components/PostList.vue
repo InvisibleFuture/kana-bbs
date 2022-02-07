@@ -8,7 +8,7 @@
         .title {{ item.user.name }}
         .info
           span {{ rwdate(item.updatedAt) }}
-          p {{ item.data }}
+          div(v-html="markdown(item.data)")
   .post-none(v-else) 没有评论~
 </template>
 
@@ -48,12 +48,16 @@
 </style>
 
 <script>
+import { marked } from "marked";
 export default {
   props: ["data"],
   methods: {
     rwdate(utc) {
       let t = new Date(utc);
       return t.getMonth() + 1 + "月 " + t.getDate() + ", " + t.getFullYear();
+    },
+    markdown(data) {
+      return marked.parse(data);
     },
   },
 };

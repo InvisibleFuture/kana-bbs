@@ -10,7 +10,16 @@
       span.tag test
       span.tag demo
   .content.circumscription
-    p {{ thread.data }}
+    .thread-main(v-html="markdown(thread.data)")
+    button.magic
+      i.fas.fa-magic
+
+    //button.editor(
+    //  v-if="account.online && (account.uid === thread.uid || account.gid === 1)",
+    //  @click="edit_mode = !edit_mode"
+    //)
+    //  i.fas.fa-magic
+    //  | Editor
     PostList(:data="postlist")
     .post-create(v-if="account.online")
       img.avatar(:src="account.avatar")
@@ -20,6 +29,7 @@
 </template>
 
 <script>
+import { marked } from "marked";
 export default {
   asyncData({ $axios, params }) {
     return $axios.get(`/api/thread/${params.id}`).then((res) => {
@@ -31,6 +41,7 @@ export default {
           attach: "thread",
           aid: params.id,
         },
+        edit_mode: false,
       };
     });
   },
@@ -43,6 +54,9 @@ export default {
     rwdate(utc) {
       let t = new Date(utc);
       return t.getMonth() + 1 + "月 " + t.getDate() + ", " + t.getFullYear();
+    },
+    markdown(data) {
+      return marked.parse(data);
     },
     loadpostlist() {
       this.$axios
@@ -66,6 +80,9 @@ export default {
 
 
 <style lang="sass">
+.thread-main
+  margin: 0 0 4rem 0
+  padding: 2rem
 .thread
   >.header
     height: 240px
@@ -86,6 +103,10 @@ export default {
     top: -5rem
     border-radius: .5rem
     box-sizing: border-box
+    >.editor
+      position: absolute
+      top: 1rem
+      right: 1rem
 .post-create
   display: flex
   //background: #c8d22d

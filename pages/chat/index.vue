@@ -56,6 +56,10 @@ export default {
       this.chatactive.push(data);
       console.log(data);
     });
+    // 加载一部分历史聊天记录, 并在向上滚动时继续触发加载
+    // 基于什么信息进行分P加载呢...?
+    // 基于消息 _id 的链表向上下翻阅, 当消息从中间删除时, 进行链表对接
+
     // 组合键提交
     this.keyCodeForEvent();
   },
