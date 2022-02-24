@@ -10,9 +10,18 @@
           span {{ rwdate(item.updatedAt) }}
           div(v-html="markdown(item.data)")
       .options
-        i.fas.fa-eraser(v-if="account.gid === 1 || account.uid === item.uid")
-        i.fas.fa-marker(v-if="account.gid === 1 || account.uid === item.uid")
-        i.fas.fa-heart(:class="{ like: item.like }", @click="like(item._id)")
+        i.fas.fa-eraser(
+          v-if="account.gid === 1 || account.uid === item.uid",
+          @click="remove(item._id)"
+        )
+        i.fas.fa-marker(
+          v-if="account.gid === 1 || account.uid === item.uid",
+          @click="remove(item._id)"
+        )
+        i.fas.fa-heart(
+          :class="{ like: item.like }",
+          @click="like(item._id, item.like)"
+        )
   .post-none(v-else) 没有评论~
 </template>
 
@@ -87,9 +96,21 @@ export default {
     markdown(data) {
       return marked.parse(data);
     },
-    like(_id) {
+    like(_id, en) {
+      if (en) {
+        return this.$axios
+          .delete("/api/like?attach=post&aid=" + _id)
+          .then((res) => {
+            if (res.status === 200) {
+              this.data.forEach((item) => {
+                if (item._id === _id) {
+                  item.like = false;
+                }
+              });
+            }
+          });
+      }
       let data = { attach: "post", aid: _id };
-      console.log(data);
       this.$axios.post("/api/like", data).then((res) => {
         if (res.status === 200) {
           this.data.forEach((item) => {
@@ -97,6 +118,16 @@ export default {
               item.like = true;
             }
           });
+        }
+      });
+    },
+    remove(_id) {
+      this.$axios.delete("/api/post/" + _id).then((res) => {
+        if (res.status === 200) {
+          this.$emit(
+            "update:data",
+            this.data.filter((item) => item._id !== _id)
+          );
         }
       });
     },

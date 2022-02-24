@@ -20,7 +20,7 @@ Drawer
       //)
       //  i.fas.fa-magic
       //  | Editor
-      PostList(:data="postlist")
+      PostList(:data.sync="postlist")
       .post-create(v-if="account.online")
         img.avatar(:src="account.avatar")
         .content

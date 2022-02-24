@@ -7,6 +7,7 @@
     .name {{ account.name }}
     input#img_add(type="file", accept="image/*", @change="upload($event)")
     // multiple="multiple",
+    input#bg(type="file", accept="image/*", @change="upload_bg($event)")
   .content.main-width
     p account
     NuxtLink.button(to="/account/setting") 账户设置
@@ -23,7 +24,15 @@ export default {
     upload(event) {
       let data = new FormData();
       let option = { headers: { "Content-Type": "multipart/form-data" } };
-      data.append("img", event.target.files[0]);
+      data.append("avatar", event.target.files[0]);
+      this.$axios.post("/api/account", data, option).then((res) => {
+        console.log(res.data);
+      });
+    },
+    upload_bg(event) {
+      let data = new FormData();
+      let option = { headers: { "Content-Type": "multipart/form-data" } };
+      data.append("background", event.target.files[0]);
       this.$axios.post("/api/account", data, option).then((res) => {
         console.log(res.data);
       });

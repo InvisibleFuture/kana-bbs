@@ -4,7 +4,7 @@
     .circumscription
       .logo Kana
       nav.navbar
-        NuxtLink.navbar-item(to="/") 论坛
+        NuxtLink.navbar-item(:to="{ path: '/' }") 论坛
         NuxtLink.navbar-item(to="/docs") 文档
         NuxtLink.navbar-item(to="/chat") 聊天室
         //NuxtLink.navbar-item(to="/admin") admin
@@ -114,14 +114,14 @@ footer.footer
   .github
     font-size: 2rem
 
-.admin
-  position: relative
-.admin::before
-  position: absolute
-  top: 0
-  right: 0
-  content: '演示'
-  width: 4rem
-  height: 2rem
-  background: #ff1414
+//.admin
+//  position: relative
+//.admin::before
+//  position: absolute
+//  top: 0
+//  right: 0
+//  content: '演示'
+//  width: 4rem
+//  height: 2rem
+//  background: #ff1414
 </style>

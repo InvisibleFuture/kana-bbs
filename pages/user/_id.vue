@@ -4,10 +4,12 @@
     img.avatar(:src="user.avatar")
     h1
       span.name {{ user.name }}
-      span.admin(v-if="user.gid === 1") Admin
+      span.admin(v-if="user.gid === 1")
+        i.fas.fa-user-shield
   .content
-    p USER
-    p {{ user }}
+    ModelBoxNone
+    p 没有公开的资源..
+    //p {{ user }}
 </template>
 
 <script>
@@ -36,4 +38,14 @@ export default {
       overflow: hidden
     .name
       color: #ffffff
+    .admin
+      margin: 0 .5rem
+      font-size: 1.2rem
+      color: #ffffff
+      background: #ff9988
+      border-radius: .25rem
+      //padding: 0 .5rem
+  >.content
+    padding: 4rem
+    text-align: center
 </style>
