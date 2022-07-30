@@ -2,7 +2,8 @@
 .dialogue-list
   .post(v-for="item in data", :key="item._id")
     .left
-      img.avatar(:src="item.user.avatar")
+      div.avatar(v-if="item.user.name === '游客'")
+      img.avatar(v-else :src="item.user.avatar")
     .right
       .name {{ item.user.name }}
       .message {{ item.data }}
@@ -25,7 +26,7 @@ export default {
       .avatar
         width: 2rem
         height: 2rem
-        background: #ccc
+        background: #dddddd
         border-radius: 50%
         margin: .5rem auto
     .right
