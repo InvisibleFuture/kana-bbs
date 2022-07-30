@@ -107,7 +107,9 @@ export default {
               height: 24px
               border-radius: 50%
               margin-right: .5rem
-
+        .navbar-sign
+          a.button
+            margin-right: .5rem
 footer.footer
   text-align: center
   padding: 4rem

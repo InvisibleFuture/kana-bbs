@@ -1,16 +1,11 @@
 <template lang="pug">
-.page-signin
-  .contenter
-    Card
-      template(#header)
-      .column
-        input(v-model="account.name", type="text", placeholder="请输入账号")
-        input(v-model="account.password", type="password", placeholder="请输入密码")
-        button(@click="signin") signin
-      template(#footer)
-        p
-          span 还没有账号?
-          NuxtLink(to="/account/create") 注册一个
+.account-signin.circumscription
+  div.card
+    .left SIGN IN
+    .right
+      input(v-model="account.name", type="text", placeholder="account")
+      input(v-model="account.password", type="password", placeholder="password")
+      button(@click="signin") Signin
 </template>
 
 <script>
@@ -38,19 +33,51 @@ export default {
 </script>
 
 <style lang="sass">
-.page-signin
-  .contenter
-    .column
+.account-signin
+  padding-top: 6rem
+  .card
+    display: flex
+    width: 48rem
+    margin: auto
+    background-color: var(--background-main)
+    margin-top: 6rem
+    padding: 6rem 4rem
+    border-radius: 1rem
+    box-sizing: border-box
+    .left
+      flex: 1
+      font-size: 4rem
+      font-weight: bold
+      color: #ff8888
+      display: flex
+      justify-content: center
+      align-items: center
+    .right
+      width: 18rem
       display: flex
       flex-direction: column
-      background: #f5f5f5
-      padding: 6rem 0
       input, button
-        width: 16rem
-        height: 3rem
-        line-height: 3rem
-        border: 1px solid #ccc
+        margin-bottom: 1rem
+        font-size: 1.2rem
+        padding: .75rem
+        border: none
         border-radius: .5rem
-        padding: 0 1rem
-        margin: .5rem auto
+//.page-signin
+  //.contenter
+  //  background: #f5f5f5
+  //  .column
+  //    display: flex
+  //    flex-direction: column
+  //    padding: 6rem 0
+  //    input, button
+  //      width: 16rem
+  //      height: 3rem
+  //      line-height: 3rem
+  //      border: 1px solid #ccc
+  //      border-radius: .5rem
+  //      padding: 0 1rem
+  //      margin: .5rem auto
+  //    p
+  //      width: 16rem
+  //      margin: .5rem auto
 </style>

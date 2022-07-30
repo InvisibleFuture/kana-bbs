@@ -1,18 +1,19 @@
 <template lang="pug">
-.thread-create
-  .header
-    h1.title {{ thread.title }}
-    .info info
-      //span.user {{ thread.user.name }}
-      //span.date {{ rwdate(thread.createdAt) }}
-      //span.view {{ thread.views }}
-    .tags
-      span.tag test
-      span.tag demo
-  .content.circumscription
-    input.title(v-model="thread.title")
-    textarea.data(v-model="thread.data", rows="32")
-    button.submit(@click="submit") 发表
+Drawer
+  .thread-create
+    .header
+      h1.title {{ thread.title }}
+      .info info
+        //span.user {{ thread.user.name }}
+        //span.date {{ rwdate(thread.createdAt) }}
+        //span.view {{ thread.views }}
+      .tags
+        span.tag test
+        span.tag demo
+    .content.circumscription
+      input.title(v-model="thread.title")
+      textarea.data(v-model="thread.data", rows="32")
+      button.submit(@click="submit") 发表
 </template>
 
 <script>
